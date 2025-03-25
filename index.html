@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> <!-- Подключение стилей -->
+    <title>Туристическая Компания</title>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать в нашу туристическую компанию</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li> <!-- Ссылка на главную страницу -->
+                <li><a href="pages/about.html">О компании</a></li> <!-- Ссылка на страницу "О компании" -->
+                <li><a href="pages/tours.html">Туры</a></li> <!-- Ссылка на страницу с турами -->
+                <li><a href="pages/contact.html">Контакты</a></li> <!-- Ссылка на страницу контактной информации -->
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="slider"> <!-- Раздел с рекламным слайдером -->
+            <h2>Наши лучшие предложения</h2>
+            <div class="slider">
+                <div class="slides"> <!-- Контейнер для слайдов -->
+                    <img src="images/ispan.jpg" alt="Предложение 1" class="slide"> <!-- Слайд 1 -->
+                    <img src="images/paris.jpg" alt="Предложение 2" class="slide"> <!-- Слайд 2 -->
+                    <img src="images/rim.jpg" alt="Предложение 3" class="slide"> <!-- Слайд 3 -->
+                </div>
+                <div class="nav-buttons"> <!-- Кнопки навигации -->
+                    <button class="nav-button" id="prevBtn">◀</button> <!-- Кнопка для просмотра предыдущего слайда -->
+                    <button class="nav-button" id="nextBtn">▶</button> <!-- Кнопка для просмотра следующего слайда -->
+                </div>
+            </div>
+        </section>
+
+        <section id="offers"> <!-- Раздел с предложениями туров -->
+            <h2>Предложения туров</h2>
+            <div class="tour-card"> <!-- Карточка тура -->
+                <h3>Тур 1</h3>
+                <p>Описание тура.</p> <!-- Описание данного тура -->
+            </div>
+            <!-- Дополнительные туры можно добавить здесь -->
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 Туристическая Компания</p> <!-- Подвал страницы с авторскими правами -->
+    </footer>
+
+    <script>
+        let currentSlide = 0; // Индекс текущего слайда
+        const slides = document.querySelectorAll('.slide'); // Получение всех слайдов
+
+        function showSlide(index) {
+            const totalSlides = slides.length; // Общее количество слайдов
+            // Проверка границ индекса слайда
+            if (index >= totalSlides) {
+                currentSlide = 0; // Если индекс превышает общее количество, возвращаем к первому слайду
+            } else if (index < 0) {
+                currentSlide = totalSlides - 1; // Если индекс меньше нуля, переходим к последнему слайду
+            } else {
+                currentSlide = index; // Установка текущего слайда по индексу
+            }
+
+            // Расчет смещения для слайда
+            const offset = -currentSlide * 100; 
+            document.querySelector('.slides').style.transform = `translateX(${offset}%)`; // Применение смещения
+        }
+
+        // Добавление обработчика событий для кнопок навигации
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            showSlide(currentSlide - 1); // Показать предыдущий слайд
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            showSlide(currentSlide + 1); // Показать следующий слайд
+        });
+
+        showSlide(currentSlide); // Показать начальный слайд
+    </script>
+</body>
+</html>

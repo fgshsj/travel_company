@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru"> <!-- Установка языка страницы -->
+<head>
+    <meta charset="UTF-8"> <!-- Установка кодировки страницы -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Поддержка адаптивного дизайна -->
+    <link rel="stylesheet" href="../style.css"> <!-- Подключение общего стиля -->
+    <title>Контакты</title> <!-- Заголовок страницы -->
+</head>
+<body>
+    <header>
+        <h1>Туристическая Компания</h1> <!-- Заголовок сайта -->
+        <nav>
+            <ul>
+                <li><a href="../index.html">Главная</a></li> <!-- Ссылка на главную страницу -->
+                <li><a href="about.html">О компании</a></li> <!-- Ссылка на страницу "О компании" -->
+                <li><a href="tours.html">Туры</a></li> <!-- Ссылка на страницу "Туры" -->
+                <li><a href="contact.html">Контакты</a></li> <!-- Ссылка на страницу "Контакты" -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Контакты</h2> <!-- Заголовок раздела "Контакты" -->
+        <form> <!-- Форма для отправки данных -->
+            <label for="name">Имя:</label> <!-- Метка для поля ввода имени -->
+            <input type="text" id="name" name="name" required> <!-- Поле ввода имени -->
+
+            <label for="email">Email:</label> <!-- Метка для поля ввода email -->
+            <input type="email" id="email" name="email" required> <!-- Поле ввода email, требуется для заполнения -->
+
+            <label for="message">Сообщение:</label> <!-- Метка для поля ввода сообщения -->
+            <textarea id="message" name="message" required></textarea> <!-- Поле для текстового сообщения -->
+
+            <button type="submit">Отправить</button> <!-- Кнопка отправки формы -->
+        </form>
+
+        <h3>Наша локация</h3> <!-- Заголовок секции с картой -->
+        <div id="map"> <!-- Контейнер для карты -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24884.792826087562!2d30.3158!3d59.9343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46963115d5fdc8cf%3A0x77cb9d5e2d0a649!2z0YPQuy4g0JzRgtC_0LvQsNGA0LLQvtC70YzQv9Cw0YLRgNGG0L3QtNC-0LUg0JPQuCDQsNGC0L7RgdGC0L4!5e0!3m2!1sru!2sru!4v1636118129581!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> <!-- Встраиваемая карта Google Maps -->
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2023 Туристическая Компания</p> <!-- Подвал страницы с авторскими правами -->
+    </footer>
+
+    <script src="scripts.js"></script> <!-- Подключение скриптов -->
+</body>
+</html>

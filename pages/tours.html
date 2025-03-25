@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru"><!-- Установка языка страницы -->
+<head>
+    <meta charset="UTF-8"> <!-- Установка кодировки страницы -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Поддержка адаптивного дизайна -->
+    <link rel="stylesheet" href="../style.css"> <!-- Подключение общего стиля -->
+    <title>Туры</title> <!-- Заголовок страницы -->
+</head>
+<body>
+    <header>
+        <h1>Туристическая Компания</h1> <!-- Заголовок секции -->
+        <nav>
+            <ul>
+                <li><a href="../index.html">Главная</a></li> <!-- Ссылка на главную страницу -->
+                <li><a href="about.html">О компании</a></li> <!-- Ссылка на страницу "О компании" -->
+                <li><a href="tours.html">Туры</a></li> <!-- Ссылка на страницу "Туры" -->
+                <li><a href="contact.html">Контакты</a></li> <!-- Ссылка на страницу "Контакты" -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Каталог туров</h2> <!-- Заголовок раздела с каталогом туров -->
+        
+        <section class="filter"> <!-- Секция для фильтрации туров -->
+            <h3>Фильтр по параметрам</h3> <!-- Заголовок фильтра -->
+            <form id="filterForm"> <!-- Форма фильтрации -->
+                <label for="region">Регион:</label> <!-- Метка для выбора региона -->
+                <select id="region" name="region"> <!-- Выпадающий список для выбора региона -->
+                    <option value="все">Все</option> <!-- Опция "Все" -->
+                    <option value="европа">Европа</option> <!-- Опция "Европа" -->
+                    <option value="азия">Азия</option> <!-- Опция "Азия" -->
+                    <option value="африка">Африка</option> <!-- Опция "Африка" -->
+                </select>
+    
+                <label for="type">Тип тура:</label> <!-- Метка для выбора типа тура -->
+                <select id="type" name="type"> <!-- Выпадающий список для выбора типа тура -->
+                    <option value="все">Все</option> <!-- Опция "Все" -->
+                    <option value="пляжный">Пляжный</option> <!-- Опция "Пляжный" -->
+                    <option value="экскурсионный">Экскурсионный</option> <!-- Опция "Экскурсионный" -->
+                    <option value="приключенческий">Приключенческий</option> <!-- Опция "Приключенческий" -->
+                </select>
+    
+                <label for="price">Ценовой диапазон:</label> <!-- Метка для выбора ценового диапазона -->
+                <input type="range" id="price" name="price" min="10000" max="500000" step="10000" value="500000"> <!-- Ползунок для выбора цены -->
+                <span>Цена до: <span id="priceValue">500000</span> руб.</span> <!-- Отображение выбранной цены -->
+    
+                <button type="submit">Применить фильтр</button> <!-- Кнопка для применения фильтра -->
+            </form>
+        </section>
+    
+        <section class="tours-list" id="toursList"> <!-- Секция со списком доступных туров -->
+            <h3>Доступные туры</h3> <!-- Заголовок списка туров -->
+            <ul> <!-- Список туров -->
+                <li data-region="европа" data-type="пляжный" data-price="300000"> <!-- Тур с данными о регионе, типе и цене -->
+                    <a href="europa.html">Тур в Европу</a> <!-- Ссылка на подробности тура -->
+                    <p>Пляжный отдых на Средиземном море - цена 300000 руб.</p> <!-- Описание тура -->
+                </li>
+                <li data-region="азия" data-type="приключенческий" data-price="450000"> <!-- Тур с данными о регионе, типе и цене -->
+                    <a href="tour-detail.html?tourId=2">Приключенческий тур в Азию</a> <!-- Ссылка на подробности тура -->
+                    <p>Экскурсии и активный отдых - цена 450000 руб.</p> <!-- Описание тура -->
+                </li>
+                <li data-region="африка" data-type="экскурсионный" data-price="250000"> <!-- Тур с данными о регионе, типе и цене -->
+                    <a href="tour-detail.html?tourId=3">Экскурсия по Африке</a> <!-- Ссылка на подробности тура -->
+                    <p>Незабываемые safari - цена 250000 руб.</p> <!-- Описание тура -->
+                </li>
+            </ul>
+        </section>
+    </main>
+    
+
+    <footer>
+        <p>© 2023 Туристическая Компания</p> <!-- Подвал с правами на контент -->
+    </footer>
+    
+    <script>
+        const form = document.getElementById('filterForm'); // Получаем элемент формы фильтра
+        const priceInput = document.getElementById('price'); // Получаем элемент ползунка для цены
+        const priceValue = document.getElementById('priceValue'); // Получаем элемент для отображения значения цены
+    
+        priceInput.addEventListener('input', function () { // Добавляем обработчик события на изменение ползунка
+            priceValue.textContent = this.value; // Обновляем отображаемое значение цены
+        });
+    
+        form.addEventListener('submit', function (event) { // Добавляем обработчик события на отправку формы
+            event.preventDefault(); // Предотвращаем стандартное поведение формы
+            const region = form.region.value; // Получаем выбранный регион
+            const type = form.type.value; // Получаем выбранный тип тура
+            const maxPrice = parseInt(priceInput.value); // Получаем максимальную цену
+            const tours = document.querySelectorAll('#toursList li'); // Получаем все элементы туров
+    
+            tours.forEach(tour => { // Проходим по каждому туру
+                const tourRegion = tour.getAttribute('data-region'); // Получаем данные региона у текущего тура
+                const tourType = tour.getAttribute('data-type'); // Получаем данные типа тура
+                const tourPrice = parseInt(tour.getAttribute('data-price')); // Получаем цену тура
+    
+                let showTour = true; // Переменная для контроля показа тура
+    
+                // Проверяем соответствие региона
+                if (region !== 'все' && tourRegion !== region) {
+                    showTour = false; // Скрываем тур, если регион не совпадает
+                }
+                // Проверяем соответствие типа тура
+                if (type !== 'все' && tourType !== type) {
+                    showTour = false; // Скрываем тур, если тип не совпадает
+                }
+                // Проверяем соответствие ценового диапазона
+                if (tourPrice > maxPrice) {
+                    showTour = false; // Скрываем тур, если цена превышает максимальную
+                }
+    
+                tour.style.display = showTour ? '' : 'none'; // Устанавливаем стиль отображения тура
+            });
+        });
+    </script>
+    
+</body>
+</html>
